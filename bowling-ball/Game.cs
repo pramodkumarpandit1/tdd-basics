@@ -4,12 +4,38 @@ namespace BowlingBall
 {
     public class Game
     {
-        public void Roll(int pins)
-        {
-            throw new NotImplementedException();
+        private int currentFrame = 0;
+        private bool isFirstRoll = true;
+        public int Score => GetScore(currentFrame);
+        public void Rolls(int pins)
+        {           
+            CalculateCurrentFrame(pins);
         }
-
-        public int GetScore()
+        private void CalculateCurrentFrame(int pins)
+        {
+            if (LastBallInFrame(pins))
+            {
+                CalculateFrame();
+            }
+            else
+            {
+                isFirstRoll = false;
+            }
+        }
+        private bool LastBallInFrame(int pins)
+        {
+            return Strike(pins) || (!isFirstRoll);
+        }
+        private bool Strike(int pins)
+        {
+            return (isFirstRoll && pins == 10);
+        }
+        private void CalculateFrame()
+        {
+            currentFrame++; if (currentFrame > 10)
+            { currentFrame = 10; }
+        }
+        public int GetScore(int nFrame)
         {
             return 0;
         }
