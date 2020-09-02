@@ -1,14 +1,14 @@
-﻿using System;
-
-namespace BowlingBall
+﻿namespace BowlingBall
 {
     public class Game
     {
         private int currentFrame = 0;
         private bool isFirstRoll = true;
+        private Score score = new Score();
         public int Score => GetScore(currentFrame);
         public void Rolls(int pins)
-        {           
+        {
+            score.AddRoll(pins);
             CalculateCurrentFrame(pins);
         }
         private void CalculateCurrentFrame(int pins)
@@ -37,7 +37,7 @@ namespace BowlingBall
         }
         public int GetScore(int nFrame)
         {
-            return 0;
+            return score.ScoreForFrame(nFrame);
         }
 
     }
